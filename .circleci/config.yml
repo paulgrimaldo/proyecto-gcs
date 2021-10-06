@@ -62,8 +62,8 @@ jobs:
       LC_CALL: en_US.UTF-8
     steps: 
       - run: |
-        sbt "project gcsAppIT" test
+          sbt "project gcsAppIT" test
       - store_artifacts:
-        path: expected.png
+          path: expected.png
       - store_artifacts:
-        path: result.png  
+          path: result.png  
