@@ -82,6 +82,7 @@ jobs:
     steps:
       - checkout 
       - run:  sudo apt update
+      - run:  sudo apt install software-properties-common
       - run:  sudo add-apt-repository main
       - run:  sudo add-apt-repository universe
       - run:  sudo add-apt-repository restricted
