@@ -70,7 +70,7 @@ jobs:
           path: result.png
   package-deploy:
     docker:
-      - image: xaviercalland/docker-maven-rpm:rpm-maven-3.5.3-jdk-8
+      - image: circleci/openjdk:8-jdk
 
     working_directory: ~/repo
 
@@ -82,6 +82,12 @@ jobs:
     steps:
       - checkout 
       - run: |
+          sudo add-apt-repository main
+          sudo add-apt-repository universe
+          sudo add-apt-repository restricted
+          sudo add-apt-repository multiverse  
+          sudo apt-get update
+          sudo apt-get install rpm
           sbt rpm:packageBin
 
 
