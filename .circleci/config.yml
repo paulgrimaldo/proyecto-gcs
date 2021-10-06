@@ -48,6 +48,7 @@ jobs:
   
   test:
     docker: 
+      - image: circleci/openjdk:8-jdk
       - image: postgres:13
         environment:
           POSTGRES_PASSWORD: 'gcs'
