@@ -3,7 +3,7 @@ yum -y update
 yum -y install java-1.8.0-openjdk-devel
 curl https://downloads.lightbend.com/scala/2.12.10/scala-2.12.10.rpm --output scala-2.12.10.rpm
 yum -y install scala-2.12.10.rpm
-curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+curl https://www.scala-sbt.org/sbt-rpm.repo | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
 yum -y install sbt
 yum install -y git
 yum install -y which
