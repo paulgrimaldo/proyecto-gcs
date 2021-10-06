@@ -99,6 +99,8 @@ jobs:
       - run: ssh azureuser@52.168.126.65 "sudo sed -i 's/localhost/10.0.0.5/g' /etc/gcs-app/application.conf"
       - run: ssh azureuser@52.168.126.65 "sudo chown -R gcs-app /usr/share/gcs-app/"
       - run: ssh azureuser@52.168.126.65 "sudo chgrp -R gcs-app /usr/share/gcs-app/"
+      - run: ssh azureuser@52.168.126.65 "sudo systemctl start gcs-app"
+      - run: ssh azureuser@52.168.126.65 "sudo rm /usr/share/gcs-app/RUNNING_PID"
       - run: ssh azureuser@52.168.126.65 "sudo systemctl restart gcs-app"
           
 workflows:
