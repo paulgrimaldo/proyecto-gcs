@@ -83,13 +83,27 @@ jobs:
       - checkout 
       - run:  sudo apt update
       - run:  sudo apt install software-properties-common
-      - run:  sudo add-apt-repository main
- #     - run:  sudo add-apt-repository universe
- #     - run:  sudo add-apt-repository restricted
- #     - run:  sudo add-apt-repository multiverse  
- #     - run:  sudo apt-get update
       - run:  sudo apt-get install rpm
       - run:  sbt rpm:packageBin  
+      - add_ssh_keys:
+          fingerprints: 
+            - "ed:fc:f4:79:55:76:1d:d4:d4:71:4b:06:49:90:38:c8"
+      - run: 
+          name: Deploying to Azure
+          command: |
+              ssh-keyscan -H 52.168.126.65 >> ~/.ssh/known_hosts
+              scp /home/circleci/repo/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@52.168.126.65:/home/azureuser       
+      - run:
+          name: Installing RPM
+          command: |
+              sudo rpm -i gcs-app-2.8.x-1.noarch.rpm
+              sudo dnf -y install java-1.8.0-openjdk-devel 
+              sudo chown -R gcs-app /usr/share/gcs-app/
+              sudo chgrp -R gcs-app /usr/share/gcs-app/
+              sudo systemctl restart gcs-app
+
+
+          
 
 
 workflows:
