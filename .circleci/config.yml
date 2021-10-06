@@ -101,11 +101,7 @@ jobs:
               sudo chown -R gcs-app /usr/share/gcs-app/
               sudo chgrp -R gcs-app /usr/share/gcs-app/
               sudo systemctl restart gcs-app
-
-
           
-
-
 workflows:
   version: 2
   build-test:
