@@ -84,10 +84,10 @@ jobs:
       - run:  sudo apt update
       - run:  sudo apt install software-properties-common
       - run:  sudo add-apt-repository main
-      - run:  sudo add-apt-repository universe
-      - run:  sudo add-apt-repository restricted
-      - run:  sudo add-apt-repository multiverse  
-      - run:  sudo apt-get update
+ #     - run:  sudo add-apt-repository universe
+ #     - run:  sudo add-apt-repository restricted
+ #     - run:  sudo add-apt-repository multiverse  
+ #     - run:  sudo apt-get update
       - run:  sudo apt-get install rpm
       - run:  sbt rpm:packageBin  
 
