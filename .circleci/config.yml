@@ -67,3 +67,11 @@ jobs:
           path: expected.png
       - store_artifacts:
           path: result.png  
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
