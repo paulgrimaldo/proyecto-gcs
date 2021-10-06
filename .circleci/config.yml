@@ -89,15 +89,13 @@ jobs:
           fingerprints: 
             - "ed:fc:f4:79:55:76:1d:d4:d4:71:4b:06:49:90:38:c8"
       - run: 
-          name: Deploying to Azure
+          name: Deploying and installing to Azure
           command: |
               ssh-keyscan -H 52.168.126.65 >> ~/.ssh/known_hosts
-              scp /home/circleci/repo/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@52.168.126.65:/home/azureuser       
-      - run:
-          name: Installing RPM
-          command: |
-              ssh azureuser@52.168.126.65 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
-      - run: ssh azureuser@52.168.126.65 "sudo dnf -y install java-1.8.0-openjdk-devel" 
+              scp /home/circleci/repo/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@52.168.126.65:/home/azureuser  
+      - run: ssh azureuser@52.168.126.65 "sudo systemctl stop gcs-app"             
+      - run: ssh azureuser@52.168.126.65 "sudo rpm -e gcs-app || true"
+      - run: ssh azureuser@52.168.126.65 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
       - run: ssh azureuser@52.168.126.65 "sudo sed -i 's/localhost/10.0.0.5/g' /etc/gcs-app/application.conf"
       - run: ssh azureuser@52.168.126.65 "sudo chown -R gcs-app /usr/share/gcs-app/"
       - run: ssh azureuser@52.168.126.65 "sudo chgrp -R gcs-app /usr/share/gcs-app/"
