@@ -96,11 +96,11 @@ jobs:
       - run:
           name: Installing RPM
           command: |
-              sudo rpm -i gcs-app-2.8.x-1.noarch.rpm
-              sudo dnf -y install java-1.8.0-openjdk-devel 
-              sudo chown -R gcs-app /usr/share/gcs-app/
-              sudo chgrp -R gcs-app /usr/share/gcs-app/
-              sudo systemctl restart gcs-app
+              ssh azureuser@52.168.126.65 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
+              ssh azureuser@52.168.126.65 "sudo dnf -y install java-1.8.0-openjdk-devel" 
+              ssh azureuser@52.168.126.65 "sudo chown -R gcs-app /usr/share/gcs-app/"
+              ssh azureuser@52.168.126.65 "sudo chgrp -R gcs-app /usr/share/gcs-app/"
+              ssh azureuser@52.168.126.65 "sudo systemctl restart gcs-app"
           
 workflows:
   version: 2
