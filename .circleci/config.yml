@@ -61,8 +61,8 @@ jobs:
       TERM: dumb
       LC_CALL: en_US.UTF-8
     steps: 
-      - run: |
-          sbt "project gcsAppIT" test
+      - checkout
+      - run: cat /dev/null | sbt "project gcsAppIT" test
       - store_artifacts:
           path: expected.png
       - store_artifacts:
