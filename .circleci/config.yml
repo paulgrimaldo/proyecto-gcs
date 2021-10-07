@@ -94,6 +94,10 @@ jobs:
           command: |
               ssh-keyscan -H 52.168.126.65 >> ~/.ssh/known_hosts
               scp /home/circleci/repo/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@52.168.126.65:/home/azureuser  
+      - run: 
+          name: Copying documentation to Azure
+          command: |
+              scp -r /home/circleci/repo/gcs-app/target/scala-2.13/api/ azureuser@52.168.126.65:/home/azureuser/docs
       - run: ssh azureuser@52.168.126.65 "sudo systemctl stop gcs-app"             
       - run: ssh azureuser@52.168.126.65 "sudo rpm -e gcs-app || true"
       - run: ssh azureuser@52.168.126.65 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
